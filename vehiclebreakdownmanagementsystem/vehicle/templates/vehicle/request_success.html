@@ -1,0 +1,213 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Request Submitted</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f8fd;
+            color: #12213f;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 100px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 45px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        .success-icon {
+            width: 75px;
+            height: 75px;
+            margin: auto;
+            border-radius: 50%;
+            background: #e8f7ee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            color: #198754;
+        }
+
+        h1 {
+            margin-top: 22px;
+            color: #12213f;
+        }
+
+        .message {
+            color: #71819d;
+            line-height: 1.6;
+        }
+
+        .request-id {
+            margin: 25px 0;
+            padding: 20px;
+            border-radius: 12px;
+            background: #edf4ff;
+        }
+
+        .request-id p {
+            margin: 0 0 8px;
+            color: #71819d;
+        }
+
+        .request-id h2 {
+            margin: 0;
+            color: #1760db;
+            font-size: 30px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 9px 20px;
+            border-radius: 30px;
+            background: #fff4d6;
+            color: #946200;
+            font-weight: bold;
+        }
+
+        .buttons {
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 14px 25px;
+            border-radius: 9px;
+            font-weight: bold;
+            margin: 5px;
+        }
+
+        .primary {
+            background: #1760db;
+            color: white;
+        }
+
+        .secondary {
+            background: #edf4ff;
+            color: #1760db;
+        }
+
+        .payment {
+            background: #198754;
+            color: white;
+        }
+
+        .receipt {
+            background: #6f42c1;
+            color: white;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h1>
+            Request Submitted Successfully!
+        </h1>
+
+        <p class="message">
+            Your roadside assistance request has been received.
+            Please save your Request ID to track your service.
+        </p>
+
+
+        <div class="request-id">
+
+            <p>
+                Your Request ID
+            </p>
+
+            <h2>
+                VBA-{{ request_id }}
+            </h2>
+
+        </div>
+
+
+        <div>
+
+            <span class="status">
+                Pending
+            </span>
+
+        </div>
+
+
+        <div class="buttons">
+
+            <!-- Payment Button -->
+            <a href="{% url 'payment' request_id %}"
+               class="btn payment">
+                💳 Make Payment
+            </a>
+
+
+            <!-- Payment Receipt -->
+            {% if request_data.payment_status == "Paid" %}
+
+                <a href="{% url 'payment_receipt_pdf' request_data.id %}"
+                   class="btn receipt">
+                    📄 Download Payment Receipt
+                </a>
+
+            {% endif %}
+
+
+            <!-- Track Request -->
+            <a href="{% url 'track_request' %}"
+               class="btn secondary">
+                🔍 Track Request
+            </a>
+
+
+            <!-- Home -->
+            <a href="{% url 'home' %}"
+               class="btn primary">
+                Back to Home
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
+```

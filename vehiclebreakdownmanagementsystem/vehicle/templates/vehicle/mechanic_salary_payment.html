@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Mechanic Salary Payment | M K Garage</title>
+
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f9;
+        color: #222;
+    }
+
+    /* HEADER */
+
+    .header {
+        background: #111827;
+        color: white;
+        padding: 20px 40px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header h2 {
+        letter-spacing: 1px;
+    }
+
+    .header-right {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .header-right a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    /* NAVIGATION */
+
+    .nav {
+        background: white;
+        padding: 16px;
+        text-align: center;
+        box-shadow: 0 2px 8px #ccc;
+    }
+
+    .nav a {
+        text-decoration: none;
+        color: #222;
+        font-weight: bold;
+        margin: 0 15px;
+    }
+
+    .nav a:hover {
+        color: #2563eb;
+    }
+
+    /* CONTAINER */
+
+    .container {
+        width: 90%;
+        max-width: 750px;
+        margin: 45px auto;
+    }
+
+    /* CARD */
+
+    .card {
+        background: white;
+        padding: 35px;
+        border-radius: 14px;
+
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    .title {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .title h1 {
+        color: #111827;
+        margin-bottom: 8px;
+    }
+
+    .title p {
+        color: #666;
+    }
+
+    /* MECHANIC INFO */
+
+    .mechanic-info {
+        background: #f8fafc;
+        border-left: 5px solid #2563eb;
+
+        padding: 18px;
+
+        margin-bottom: 25px;
+
+        border-radius: 8px;
+    }
+
+    .mechanic-info p {
+        margin: 7px 0;
+    }
+
+    .mechanic-info strong {
+        color: #111827;
+    }
+
+    /* FORM */
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+
+        margin-bottom: 8px;
+
+        font-weight: bold;
+
+        color: #374151;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+
+        width: 100%;
+
+        padding: 12px;
+
+        border: 1px solid #cbd5e1;
+
+        border-radius: 7px;
+
+        font-size: 15px;
+
+        outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+
+        border-color: #2563eb;
+
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.10);
+    }
+
+    textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    /* BUTTONS */
+
+    .buttons {
+        display: flex;
+        gap: 15px;
+        margin-top: 25px;
+    }
+
+    .btn {
+        flex: 1;
+
+        padding: 13px;
+
+        border: none;
+
+        border-radius: 7px;
+
+        font-size: 16px;
+
+        font-weight: bold;
+
+        cursor: pointer;
+
+        text-decoration: none;
+
+        text-align: center;
+    }
+
+    .pay-btn {
+        background: #16a34a;
+        color: white;
+    }
+
+    .pay-btn:hover {
+        background: #15803d;
+    }
+
+    .back-btn {
+        background: #64748b;
+        color: white;
+    }
+
+    .back-btn:hover {
+        background: #475569;
+    }
+
+    /* FOOTER */
+
+    footer {
+        margin-top: 50px;
+
+        background: #111827;
+
+        color: white;
+
+        text-align: center;
+
+        padding: 20px;
+
+        line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+
+        .header {
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
+
+        .nav a {
+            display: inline-block;
+            margin: 7px;
+        }
+
+        .container {
+            width: 95%;
+        }
+
+        .card {
+            padding: 22px;
+        }
+
+        .buttons {
+            flex-direction: column;
+        }
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<div class="header">
+
+```
+<h2>M K GARAGE, JATH</h2>
+
+<div class="header-right">
+
+    <span>Admin</span>
+
+    <a href="{% url 'logout' %}">
+        Logout
+    </a>
+
+</div>
+```
+
+</div>
+
+<!-- NAVIGATION -->
+
+<div class="nav">
+
+```
+<a href="{% url 'admin_dashboard' %}">
+    Dashboard
+</a>
+
+<a href="{% url 'mechanic_schedule' %}">
+    Mechanical Schedule
+</a>
+
+<a href="{% url 'mechanic_monthly_payment' %}">
+    Monthly Payment
+</a>
+
+<a href="{% url 'admin_requests' %}">
+    Requests
+</a>
+
+<a href="{% url 'home' %}">
+    Website
+</a>
+```
+
+</div>
+
+<!-- MAIN -->
+
+<div class="container">
+
+```
+<div class="card">
+
+    <div class="title">
+
+        <h1>
+            Mechanic Salary Payment
+        </h1>
+
+        <p>
+            Monthly salary payment for mechanic
+        </p>
+
+    </div>
+
+
+    <!-- MECHANIC INFORMATION -->
+
+    <div class="mechanic-info">
+
+        <p>
+            <strong>Mechanic Name:</strong>
+            {{ mechanic.name }}
+        </p>
+
+        <p>
+            <strong>Specialization:</strong>
+            {{ mechanic.specialization }}
+        </p>
+
+        <p>
+            <strong>Mobile:</strong>
+            {{ mechanic.mobile }}
+        </p>
+
+        <p>
+            <strong>Location:</strong>
+            {{ mechanic.location }}
+        </p>
+
+    </div>
+
+
+    <!-- PAYMENT FORM -->
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+
+        <!-- MONTH -->
+
+        <div class="form-group">
+
+            <label>
+                Payment Month
+            </label>
+
+            <select name="month" required>
+
+                <option value="">
+                    Select Month
+                </option>
+
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+
+            </select>
+
+        </div>
+
+
+        <!-- YEAR -->
+
+        <div class="form-group">
+
+            <label>
+                Payment Year
+            </label>
+
+            <input
+                type="number"
+                name="year"
+                value="2026"
+                min="2020"
+                max="2100"
+                required>
+
+        </div>
+
+
+        <!-- SALARY -->
+
+        <div class="form-group">
+
+            <label>
+                Salary Amount (₹)
+            </label>
+
+            <input
+                type="number"
+                name="salary_amount"
+                placeholder="Enter salary amount"
+                min="0"
+                step="0.01"
+                required>
+
+        </div>
+
+
+        <!-- PAYMENT METHOD -->
+
+        <div class="form-group">
+
+            <label>
+                Payment Method
+            </label>
+
+            <select name="payment_method" required>
+
+                <option value="">
+                    Select Payment Method
+                </option>
+
+                <option value="Cash">
+                    Cash
+                </option>
+
+                <option value="UPI">
+                    UPI
+                </option>
+
+                <option value="Bank Transfer">
+                    Bank Transfer
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- PAYMENT ID -->
+
+        <div class="form-group">
+
+            <label>
+                Payment ID / Transaction ID
+            </label>
+
+            <input
+                type="text"
+                name="payment_id"
+                placeholder="Enter payment ID">
+
+        </div>
+
+
+        <!-- NOTES -->
+
+        <div class="form-group">
+
+            <label>
+                Notes
+            </label>
+
+            <textarea
+                name="notes"
+                placeholder="Enter payment notes"></textarea>
+
+        </div>
+
+
+        <!-- BUTTONS -->
+
+        <div class="buttons">
+
+            <a
+                href="{% url 'mechanic_monthly_payment' %}"
+                class="btn back-btn">
+
+                Back
+
+            </a>
+
+            <button
+                type="submit"
+                class="btn pay-btn">
+
+                Mark Payment as Paid
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+```
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+
+```
+<strong>
+    M K GARAGE, JATH
+</strong>
+
+<br>
+
+Vehicle Breakdown Assistance Management System
+```
+
+</footer>
+
+</body>
+
+</html>

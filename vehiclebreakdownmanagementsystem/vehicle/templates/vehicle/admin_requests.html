@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Assistance Requests | M K Garage</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        .header {
+            background: #111827;
+            color: white;
+            padding: 20px 40px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h2 {
+            letter-spacing: 1px;
+        }
+
+        .header a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+
+        .nav {
+            background: white;
+            padding: 15px;
+            text-align: center;
+
+            box-shadow: 0 2px 8px #ccc;
+        }
+
+        .nav a {
+            color: #222;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 15px;
+        }
+
+        .nav a:hover {
+            color: #2563eb;
+        }
+
+        .container {
+            width: 98%;
+            margin: 35px auto;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .title h1 {
+            color: #111827;
+        }
+
+        .request-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+
+            box-shadow: 0 3px 12px #ddd;
+
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #111827;
+            color: white;
+            padding: 13px;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        .manage {
+            background: #2563eb;
+            color: white;
+            padding: 7px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .delete {
+            background: #dc2626;
+            color: white;
+            padding: 7px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .paid {
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+        .unpaid {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .empty {
+            padding: 30px;
+            color: #777;
+        }
+
+        footer {
+            margin-top: 50px;
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+    <h2>M K GARAGE, JATH</h2>
+
+    <div>
+        <span>Admin</span>
+
+        <a href="{% url 'logout' %}">
+            Logout
+        </a>
+    </div>
+
+</div>
+
+
+<div class="nav">
+
+    <a href="{% url 'admin_dashboard' %}">
+        Dashboard
+    </a>
+
+    <a href="{% url 'mechanic_schedule' %}">
+        Mechanical Schedule
+    </a>
+
+    <a href="{% url 'mechanic_monthly_payment' %}">
+        Monthly Payment
+    </a>
+
+    <a href="{% url 'admin_requests' %}">
+        Requests
+    </a>
+
+    <a href="{% url 'home' %}">
+        Website
+    </a>
+
+</div>
+
+
+<div class="container">
+
+    <div class="title">
+
+        <h1>Assistance Requests</h1>
+
+        <p>
+            View and manage all vehicle breakdown assistance requests
+        </p>
+
+    </div>
+
+
+    <div class="request-box">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Request ID</th>
+
+                    <th>Customer Name</th>
+
+                    <th>Mobile</th>
+
+                    <th>Vehicle No.</th>
+
+                    <th>Vehicle Type</th>
+
+                    <th>Service</th>
+
+                    <th>Problem</th>
+
+                    <th>Location</th>
+
+                    <th>Mechanic</th>
+
+                    <th>Status</th>
+
+                    <th>Payment</th>
+
+                    <th>Amount</th>
+
+                    <th>Date</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+            {% for item in requests %}
+
+                <tr>
+
+                    <td>
+                        VBA-{{ item.id }}
+                    </td>
+
+                    <td>
+                        {{ item.customer_name }}
+                    </td>
+
+                    <td>
+                        {{ item.mobile }}
+                    </td>
+
+                    <td>
+                        {{ item.vehicle_number }}
+                    </td>
+
+                    <td>
+                        {{ item.vehicle_type }}
+                    </td>
+
+                    <td>
+                        {{ item.service }}
+                    </td>
+
+                    <td>
+                        {{ item.problem|default:"-" }}
+                    </td>
+
+                    <td>
+                        {{ item.location }}
+                    </td>
+
+                    <td>
+
+                        {% if item.assigned_mechanic %}
+                            {{ item.assigned_mechanic.name }}
+                        {% else %}
+                            Not Assigned
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+                        {{ item.status }}
+                    </td>
+
+                    <td>
+
+                        {% if item.payment_status == "Paid" %}
+
+                            <span class="paid">
+                                Paid
+                            </span>
+
+                        {% else %}
+
+                            <span class="unpaid">
+                                Unpaid
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+                        ₹{{ item.amount }}
+                    </td>
+
+                    <td>
+                        {{ item.created_at|date:"d-m-Y" }}
+                    </td>
+
+                    <td>
+
+                        <a
+                            href="{% url 'manage_request' item.id %}"
+                            class="manage">
+                            Manage
+                        </a>
+
+                        <br><br>
+
+                        <a
+                            href="{% url 'delete_request' item.id %}"
+                            class="delete">
+                            Delete
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            {% empty %}
+
+                <tr>
+
+                    <td colspan="14" class="empty">
+                        No assistance requests found.
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    M K GARAGE, JATH
+    <br>
+
+    Vehicle Breakdown Assistance Management System
+
+</footer>
+
+</body>
+</html>

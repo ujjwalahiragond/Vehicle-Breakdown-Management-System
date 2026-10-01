@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {{ service_name }} | Vehicle Breakdown Assistant
+    </title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f8fc;
+            color: #12213f;
+        }
+
+
+        /* ================= HEADER ================= */
+
+        header {
+            height: 82px;
+            background: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            border-bottom: 1px solid #e8edf5;
+        }
+
+
+        .logo {
+            text-decoration: none;
+            color: #1760db;
+
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+
+        .nav {
+            display: flex;
+            gap: 28px;
+        }
+
+
+        .nav a {
+            text-decoration: none;
+
+            color: #263b5c;
+
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+
+        .nav a:hover {
+            color: #1760db;
+        }
+
+
+        .login {
+            text-decoration: none;
+
+            color: #1760db;
+
+            font-weight: 600;
+
+            margin-right: 18px;
+        }
+
+
+        .register {
+            text-decoration: none;
+
+            background: #1760db;
+
+            color: white;
+
+            padding: 11px 20px;
+
+            border-radius: 8px;
+
+            font-weight: 600;
+        }
+
+
+        .register:hover {
+            background: #0e4fbf;
+        }
+
+
+        /* ================= PAGE ================= */
+
+        .page {
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 60px 20px 80px;
+        }
+
+
+        .back {
+            text-decoration: none;
+
+            color: #1760db;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        /* ================= SERVICE HEADER ================= */
+
+        .service-header {
+            text-align: center;
+
+            margin-top: 30px;
+        }
+
+
+        .icon {
+            width: 90px;
+            height: 90px;
+
+            background: #edf4ff;
+
+            border-radius: 24px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 45px;
+
+            margin: auto;
+        }
+
+
+        .tag {
+            display: inline-block;
+
+            margin-top: 22px;
+
+            color: #1760db;
+
+            background: #edf4ff;
+
+            padding: 7px 15px;
+
+            border-radius: 30px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        h1 {
+            font-size: 42px;
+
+            margin: 15px 0;
+
+            color: #10203c;
+        }
+
+
+        .description {
+            max-width: 700px;
+
+            margin: auto;
+
+            color: #687b9b;
+
+            font-size: 16px;
+
+            line-height: 1.7;
+        }
+
+
+        .price {
+            display: inline-block;
+
+            margin-top: 18px;
+
+            font-size: 22px;
+
+            font-weight: 800;
+
+            color: #1760db;
+        }
+
+
+        /* ================= CONTENT ================= */
+
+        .content {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 25px;
+
+            margin-top: 45px;
+        }
+
+
+        .card {
+            background: white;
+
+            border: 1px solid #e3eaf3;
+
+            border-radius: 16px;
+
+            padding: 28px;
+
+            box-shadow:
+                0 8px 25px rgba(20, 54, 100, 0.06);
+        }
+
+
+        .card h2 {
+            font-size: 19px;
+
+            margin-bottom: 15px;
+
+            color: #12213f;
+        }
+
+
+        .card p {
+            color: #687b9b;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+
+        /* ================= LIST ================= */
+
+        ul {
+            list-style: none;
+        }
+
+
+        li {
+            margin-bottom: 12px;
+
+            color: #425674;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+
+        li::before {
+            content: "✓";
+
+            color: #1760db;
+
+            font-weight: bold;
+
+            margin-right: 10px;
+        }
+
+
+        /* ================= TIME ================= */
+
+        .time-box {
+            margin-top: 25px;
+
+            background: #f7faff;
+
+            border: 1px solid #dfe9f8;
+
+            border-radius: 12px;
+
+            padding: 18px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+
+        .time-label {
+            color: #687b9b;
+
+            font-size: 13px;
+        }
+
+
+        .time {
+            color: #1760db;
+
+            font-weight: 700;
+        }
+
+
+        /* ================= MECHANIC SECTION ================= */
+
+        .mechanic-section {
+            grid-column: 1 / -1;
+        }
+
+
+        .mechanic-title {
+            font-size: 20px;
+
+            color: #12213f;
+
+            margin-bottom: 20px;
+        }
+
+
+        .mechanic-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+
+        .mechanic-box {
+            background: #f8fbff;
+
+            border: 1px solid #dce7f5;
+
+            border-radius: 14px;
+
+            padding: 20px;
+
+            transition: 0.2s;
+        }
+
+
+        .mechanic-box:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(20, 54, 100, 0.10);
+        }
+
+
+        .mechanic-name {
+            font-size: 18px;
+
+            font-weight: 700;
+
+            color: #12213f;
+
+            margin-bottom: 10px;
+        }
+
+
+        .mechanic-info {
+            color: #687b9b;
+
+            font-size: 14px;
+
+            margin-bottom: 8px;
+
+            line-height: 1.5;
+        }
+
+
+        .mechanic-mobile {
+            color: #425674;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            margin-bottom: 10px;
+        }
+
+
+        /* ================= STATUS ================= */
+
+        .mechanic-status {
+            font-size: 14px;
+
+            font-weight: 700;
+
+            margin-bottom: 14px;
+        }
+
+
+        .available {
+            color: #15803d;
+        }
+
+
+        .busy {
+            color: #dc2626;
+        }
+
+
+        .offline {
+            color: #6b7280;
+        }
+
+
+        /* ================= CALL BUTTON ================= */
+
+        .call-btn {
+            display: inline-block;
+
+            text-decoration: none;
+
+            background: #16a34a;
+
+            color: white;
+
+            padding: 9px 17px;
+
+            border-radius: 7px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        .call-btn:hover {
+            background: #15803d;
+        }
+
+
+        /* ================= NO MECHANIC ================= */
+
+        .no-mechanic {
+            background: #fff7ed;
+
+            border: 1px solid #fed7aa;
+
+            color: #9a3412;
+
+            padding: 18px;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        /* ================= ACTION ================= */
+
+        .action {
+            text-align: center;
+
+            margin-top: 40px;
+        }
+
+
+        .request-btn {
+            display: inline-block;
+
+            text-decoration: none;
+
+            background: #1760db;
+
+            color: white;
+
+            padding: 15px 32px;
+
+            border-radius: 9px;
+
+            font-weight: 700;
+
+            box-shadow:
+                0 8px 20px
+                rgba(23, 96, 219, .20);
+        }
+
+
+        .request-btn:hover {
+            background: #0e4fbf;
+        }
+
+
+        .note {
+            margin-top: 12px;
+
+            color: #71819d;
+
+            font-size: 12px;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #091328;
+
+            color: white;
+
+            padding: 30px 7%;
+
+            text-align: center;
+        }
+
+
+        footer p {
+            color: #8fa2c2;
+
+            font-size: 13px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width: 700px) {
+
+            .nav {
+                display: none;
+            }
+
+
+            header {
+                padding: 0 20px;
+            }
+
+
+            h1 {
+                font-size: 30px;
+            }
+
+
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+
+            .mechanic-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .page {
+                padding-top: 40px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+
+    <a href="{% url 'home' %}"
+       class="logo">
+
+        VBA
+
+    </a>
+
+
+    <nav class="nav">
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+
+        <a href="{% url 'home' %}#services">
+            Services
+        </a>
+
+
+        <a href="{% url 'home' %}#about">
+            About
+        </a>
+
+
+        <a href="{% url 'home' %}#contact">
+            Contact
+        </a>
+
+    </nav>
+
+
+    <div>
+
+        {% if user.is_authenticated %}
+
+            <a href="{% url 'user_dashboard' %}"
+               class="login">
+
+                Dashboard
+
+            </a>
+
+        {% else %}
+
+            <a href="{% url 'login' %}"
+               class="login">
+
+                Login
+
+            </a>
+
+
+            <a href="{% url 'register' %}"
+               class="register">
+
+                Register
+
+            </a>
+
+        {% endif %}
+
+    </div>
+
+
+</header>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="page">
+
+
+    <!-- BACK -->
+
+    <a href="{% url 'home' %}#services"
+       class="back">
+
+        ← Back to Services
+
+    </a>
+
+
+
+    <!-- ================= SERVICE HEADER ================= -->
+
+    <section class="service-header">
+
+
+        <div class="icon">
+
+            🚗
+
+        </div>
+
+
+        <span class="tag">
+
+            ROADSIDE ASSISTANCE
+
+        </span>
+
+
+        <h1>
+
+            {{ service_name }}
+
+        </h1>
+
+
+        <p class="description">
+
+            Professional roadside assistance for your vehicle.
+
+            Our system helps you request the required service
+
+            and connects your request with the appropriate
+            mechanic.
+
+        </p>
+
+
+        <div class="price">
+
+            ₹{{ amount }}
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================= CONTENT ================= -->
+
+    <section class="content">
+
+
+        <!-- ================= ABOUT ================= -->
+
+        <div class="card">
+
+
+            <h2>
+
+                About This Service
+
+            </h2>
+
+
+            <p>
+
+                {{ service_name }} provides quick and reliable
+
+                roadside assistance when your vehicle requires
+
+                professional support.
+
+            </p>
+
+
+            <div class="time-box">
+
+
+                <span class="time-label">
+
+                    Estimated Assistance Time
+
+                </span>
+
+
+                <span class="time">
+
+                    {{ estimated_time }}
+
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================= WHEN NEEDED ================= -->
+
+        <div class="card">
+
+
+            <h2>
+
+                When You May Need This
+
+            </h2>
+
+
+            <ul>
+
+
+                {% for item in when_needed %}
+
+
+                    <li>
+
+                        {{ item }}
+
+                    </li>
+
+
+                {% endfor %}
+
+
+            </ul>
+
+
+        </div>
+
+
+
+        <!-- ================= WHAT WE PROVIDE ================= -->
+
+        <div class="card">
+
+
+            <h2>
+
+                What We Provide
+
+            </h2>
+
+
+            <ul>
+
+
+                {% for item in what_provide %}
+
+
+                    <li>
+
+                        {{ item }}
+
+                    </li>
+
+
+                {% endfor %}
+
+
+            </ul>
+
+
+        </div>
+
+
+
+        <!-- ================= HOW IT WORKS ================= -->
+
+        <div class="card">
+
+
+            <h2>
+
+                How It Works
+
+            </h2>
+
+
+            <ul>
+
+
+                <li>
+
+                    Submit your assistance request
+
+                </li>
+
+
+                <li>
+
+                    Our system processes your request
+
+                </li>
+
+
+                <li>
+
+                    A suitable mechanic is assigned
+
+                </li>
+
+
+                <li>
+
+                    Mechanic reaches your location
+
+                </li>
+
+
+                <li>
+
+                    Service is completed
+
+                </li>
+
+
+            </ul>
+
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- SERVICE WISE ALL MECHANICS -->
+        <!-- ================================================= -->
+
+        <div class="card mechanic-section">
+
+
+            <h2 class="mechanic-title">
+
+                📞 {{ service_name }} Mechanics
+
+            </h2>
+
+
+            <div class="mechanic-grid">
+
+
+                {% for mechanic in service_mechanics %}
+
+
+                    <div class="mechanic-box">
+
+
+                        <!-- NAME -->
+
+                        <div class="mechanic-name">
+
+                            👨‍🔧 {{ mechanic.name }}
+
+                        </div>
+
+
+                        <!-- SPECIALIZATION -->
+
+                        <div class="mechanic-info">
+
+                            🔧 {{ mechanic.specialization }}
+
+                        </div>
+
+
+                        <!-- MOBILE -->
+
+                        <div class="mechanic-mobile">
+
+                            📱 {{ mechanic.mobile }}
+
+                        </div>
+
+
+                        <!-- LOCATION -->
+
+                        <div class="mechanic-info">
+
+                            📍 {{ mechanic.location }}
+
+                        </div>
+
+
+                        <!-- STATUS -->
+
+                        <div class="mechanic-status">
+
+
+                            {% if mechanic.status == "Available" %}
+
+
+                                <span class="available">
+
+                                    ● Available
+
+                                </span>
+
+
+                            {% elif mechanic.status == "Busy" %}
+
+
+                                <span class="busy">
+
+                                    ● Busy
+
+                                </span>
+
+
+                            {% else %}
+
+
+                                <span class="offline">
+
+                                    ● Offline
+
+                                </span>
+
+
+                            {% endif %}
+
+
+                        </div>
+
+
+                        <!-- CALL -->
+
+                        <a
+                            href="tel:{{ mechanic.mobile }}"
+                            class="call-btn"
+                        >
+
+                            📞 Call Mechanic
+
+                        </a>
+
+
+                    </div>
+
+
+                {% empty %}
+
+
+                    <div class="no-mechanic">
+
+
+                        No mechanic is registered
+                        for this service.
+
+
+                        <br><br>
+
+
+                        Please submit your assistance
+                        request. The garage will assign
+                        a suitable mechanic.
+
+
+                    </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================= REQUEST BUTTON ================= -->
+
+    <div class="action">
+
+
+        <a
+            href="{% url 'request_assistance' %}?service={{ service_name|urlencode }}"
+            class="request-btn"
+        >
+
+            Request {{ service_name }}
+
+        </a>
+
+
+        <p class="note">
+
+            You will need to login before submitting
+            an assistance request.
+
+        </p>
+
+
+    </div>
+
+
+</main>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+
+    <p>
+
+        © 2026 Vehicle Breakdown Assistant.
+
+        Fast, reliable and professional roadside assistance.
+
+    </p>
+
+
+</footer>
+
+
+</body>
+
+</html>

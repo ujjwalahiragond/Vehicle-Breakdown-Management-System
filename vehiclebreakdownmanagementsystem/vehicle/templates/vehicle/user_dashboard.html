@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Dashboard</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .header {
+            background: linear-gradient(135deg, #0d47a1, #1976d2);
+            color: white;
+            padding: 22px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        .header h1 {
+            font-size: 28px;
+        }
+
+        .header p {
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .logout-btn {
+            background: #ffffff;
+            color: #0d47a1;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .logout-btn:hover {
+            background: #e3f2fd;
+        }
+
+
+        /* =====================================================
+           MAIN CONTAINER
+        ===================================================== */
+
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 35px auto;
+        }
+
+
+        /* =====================================================
+           WELCOME
+        ===================================================== */
+
+        .welcome-box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .welcome-box h2 {
+            color: #0d47a1;
+            margin-bottom: 8px;
+        }
+
+        .welcome-box p {
+            color: #666;
+        }
+
+
+        /* =====================================================
+           QUICK BUTTONS
+        ===================================================== */
+
+        .quick-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .quick-btn {
+            text-decoration: none;
+            padding: 13px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            color: white;
+            background: #1976d2;
+        }
+
+        .quick-btn:hover {
+            background: #0d47a1;
+        }
+
+
+        /* =====================================================
+           SECTION TITLE
+        ===================================================== */
+
+        .section-title {
+            color: #0d47a1;
+            margin-bottom: 20px;
+            font-size: 25px;
+        }
+
+
+        /* =====================================================
+           REQUEST CARD
+        ===================================================== */
+
+        .request-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.10);
+            border-left: 5px solid #1976d2;
+        }
+
+        .request-card h3 {
+            color: #0d47a1;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+
+        /* =====================================================
+           REQUEST ID
+        ===================================================== */
+
+        .request-id-box {
+            background: #e3f2fd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .request-id-box small {
+            display: block;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .request-id {
+            font-size: 25px;
+            font-weight: bold;
+            color: #0d47a1;
+        }
+
+
+        /* =====================================================
+           DETAILS
+        ===================================================== */
+
+        .details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .detail-row {
+            background: #f8fafc;
+            padding: 13px;
+            border-radius: 8px;
+            border: 1px solid #e4e8ed;
+        }
+
+        .detail-row strong {
+            color: #444;
+        }
+
+
+        /* =====================================================
+           STATUS
+        ===================================================== */
+
+        .status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .accepted {
+            background: #cfe2ff;
+            color: #084298;
+        }
+
+        .onway {
+            background: #e2d9f3;
+            color: #432874;
+        }
+
+        .started {
+            background: #ffe5b4;
+            color: #8a4b00;
+        }
+
+        .completed {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .cancelled {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+
+        /* =====================================================
+           PAYMENT STATUS
+        ===================================================== */
+
+        .payment-paid {
+            display: inline-block;
+            background: #d1e7dd;
+            color: #0f5132;
+            padding: 6px 13px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .payment-pending {
+            display: inline-block;
+            background: #fff3cd;
+            color: #856404;
+            padding: 6px 13px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+
+        /* =====================================================
+           BUTTONS
+        ===================================================== */
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 11px 18px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .track-btn {
+            background: #1976d2;
+        }
+
+        .payment-btn {
+            background: #198754;
+        }
+
+        .receipt-btn {
+            background: #6f42c1;
+        }
+
+
+        /* =====================================================
+           PAYMENT INFORMATION
+        ===================================================== */
+
+        .paid-info {
+            margin-top: 18px;
+            background: #f0fff4;
+            border: 1px solid #b7e4c7;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .paid-info p {
+            margin: 5px 0;
+        }
+
+
+        /* =====================================================
+           NO REQUEST
+        ===================================================== */
+
+        .no-request {
+            background: white;
+            padding: 50px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .no-request h3 {
+            color: #0d47a1;
+            margin-bottom: 10px;
+        }
+
+        .no-request p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .footer {
+            margin-top: 50px;
+            background: #0d47a1;
+            color: white;
+            text-align: center;
+            padding: 18px;
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 700px) {
+
+            .header {
+                padding: 18px;
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .details {
+                grid-template-columns: 1fr;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div>
+
+        <h1>🚗 Customer Dashboard</h1>
+
+        <p>
+            Vehicle Breakdown Assistant
+        </p>
+
+    </div>
+
+
+    <a
+        href="{% url 'logout' %}"
+        class="logout-btn"
+    >
+        Logout
+    </a>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<div class="container">
+
+
+    <!-- =================================================
+         WELCOME
+    ================================================== -->
+
+    <div class="welcome-box">
+
+        <h2>
+            Welcome, {{ request.user.username }} 👋
+        </h2>
+
+        <p>
+            Manage your vehicle assistance requests,
+            track service status and view payment details.
+        </p>
+
+    </div>
+
+
+
+    <!-- =================================================
+         QUICK BUTTONS
+    ================================================== -->
+
+    <div class="quick-buttons">
+
+        <a
+            href="{% url 'home' %}"
+            class="quick-btn"
+        >
+            🏠 Home
+        </a>
+
+
+        <a
+            href="{% url 'request_assistance' %}"
+            class="quick-btn"
+        >
+            🚨 Request Assistance
+        </a>
+
+    </div>
+
+
+
+    <!-- =================================================
+         MY REQUESTS
+    ================================================== -->
+
+    <h2 class="section-title">
+        📋 My Requests
+    </h2>
+
+
+    {% if requests %}
+
+
+        {% for req in requests %}
+
+
+        <!-- =================================================
+             REQUEST CARD
+        ================================================== -->
+
+        <div class="request-card">
+
+
+            <h3>
+                🚗 Assistance Request
+            </h3>
+
+
+            <!-- REQUEST ID -->
+
+            <div class="request-id-box">
+
+                <small>
+                    Your Request ID
+                </small>
+
+                <div class="request-id">
+                    VBA-{{ req.id }}
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 DETAILS
+            ================================================== -->
+
+            <div class="details">
+
+
+                <div class="detail-row">
+
+                    <strong>
+                        Customer Name:
+                    </strong>
+
+                    {{ req.customer_name }}
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <strong>
+                        Mobile:
+                    </strong>
+
+                    {{ req.mobile }}
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <strong>
+                        Vehicle Number:
+                    </strong>
+
+                    {{ req.vehicle_number }}
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <strong>
+                        Vehicle Type:
+                    </strong>
+
+                    {{ req.vehicle_type }}
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <strong>
+                        Service:
+                    </strong>
+
+                    {{ req.service }}
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <strong>
+                        Location:
+                    </strong>
+
+                    {{ req.location }}
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <strong>
+                        Amount:
+                    </strong>
+
+                    ₹{{ req.amount }}
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <strong>
+                        Problem:
+                    </strong>
+
+                    {{ req.problem }}
+
+                </div>
+
+
+                <!-- REQUEST STATUS -->
+
+                <div class="detail-row">
+
+                    <strong>
+                        Request Status:
+                    </strong>
+
+                    <br><br>
+
+
+                    {% if req.status == "Pending" %}
+
+                        <span class="status pending">
+                            🟡 Pending
+                        </span>
+
+
+                    {% elif req.status == "Accepted" %}
+
+                        <span class="status accepted">
+                            🔵 Accepted
+                        </span>
+
+
+                    {% elif req.status == "On The Way" %}
+
+                        <span class="status onway">
+                            🟣 Mechanic On The Way
+                        </span>
+
+
+                    {% elif req.status == "Service Started" %}
+
+                        <span class="status started">
+                            🟠 Service Started
+                        </span>
+
+
+                    {% elif req.status == "Completed" %}
+
+                        <span class="status completed">
+                            🟢 Completed
+                        </span>
+
+
+                    {% elif req.status == "Cancelled" %}
+
+                        <span class="status cancelled">
+                            🔴 Cancelled
+                        </span>
+
+
+                    {% else %}
+
+                        <span class="status">
+                            {{ req.status }}
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <!-- PAYMENT STATUS -->
+
+                <div class="detail-row">
+
+                    <strong>
+                        Payment Status:
+                    </strong>
+
+                    <br><br>
+
+
+                    {% if req.payment_status == "Paid" %}
+
+                        <span class="payment-paid">
+                            ✅ Paid
+                        </span>
+
+                    {% else %}
+
+                        <span class="payment-pending">
+                            💳 Pending
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PAID INFORMATION
+            ================================================== -->
+
+            {% if req.payment_status == "Paid" %}
+
+            <div class="paid-info">
+
+                <p>
+                    <strong>
+                        ✅ Payment Completed
+                    </strong>
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Payment Method:
+                    </strong>
+
+                    {{ req.payment_method|default:"-" }}
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Payment ID:
+                    </strong>
+
+                    {{ req.payment_id|default:"-" }}
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Payment Date:
+                    </strong>
+
+                    {% if req.payment_date %}
+
+                        {{ req.payment_date|date:"d-m-Y h:i A" }}
+
+                    {% else %}
+
+                        -
+
+                    {% endif %}
+
+                </p>
+
+            </div>
+
+            {% endif %}
+
+
+
+            <!-- =================================================
+                 BUTTONS
+            ================================================== -->
+
+            <div class="buttons">
+
+
+                <!-- TRACK REQUEST -->
+
+                <a
+                    href="{% url 'track_request' req.id %}"
+                    class="btn track-btn"
+                >
+                    📍 Track Request
+                </a>
+
+
+
+                <!-- MAKE PAYMENT -->
+
+                {% if req.payment_status != "Paid" %}
+
+                    <a
+                        href="{% url 'payment' req.id %}"
+                        class="btn payment-btn"
+                    >
+                        💳 Make Payment ₹{{ req.amount }}
+                    </a>
+
+                {% endif %}
+
+
+
+                <!-- PDF RECEIPT -->
+
+                {% if req.payment_status == "Paid" %}
+
+                    <a
+                        href="{% url 'payment_receipt_pdf' req.id %}"
+                        class="btn receipt-btn"
+                    >
+                        📄 Download Payment Receipt
+                    </a>
+
+                {% endif %}
+
+
+            </div>
+
+
+        </div>
+
+
+        {% endfor %}
+
+
+    {% else %}
+
+
+        <!-- =================================================
+             NO REQUEST
+        ================================================== -->
+
+        <div class="no-request">
+
+            <h3>
+                No Assistance Requests Yet
+            </h3>
+
+            <p>
+                You have not submitted any vehicle
+                assistance request yet.
+            </p>
+
+
+            <a
+                href="{% url 'home' %}"
+                class="btn track-btn"
+            >
+                🚗 Request Assistance
+            </a>
+
+        </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <p>
+        Vehicle Breakdown Assistant
+    </p>
+
+    <p>
+        24 × 7 Roadside Assistance
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

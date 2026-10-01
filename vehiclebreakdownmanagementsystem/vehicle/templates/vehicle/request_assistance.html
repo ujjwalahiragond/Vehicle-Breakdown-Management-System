@@ -1,0 +1,1593 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Request Assistance | VBA</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f8fc;
+            color: #12213f;
+            line-height: 1.5;
+        }
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        header {
+            min-height: 82px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            border-bottom: 1px solid #e8edf5;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(
+                135deg,
+                #1760db,
+                #3d83f5
+            );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+            font-size: 22px;
+            font-weight: 800;
+
+            box-shadow:
+                0 5px 15px
+                rgba(23, 96, 219, 0.20);
+        }
+
+        .logo-box::before {
+            content: "V";
+        }
+
+        .logo-text h2 {
+            color: #1760db;
+            font-size: 22px;
+            margin-bottom: 2px;
+        }
+
+        .logo-text p {
+            color: #70809d;
+            font-size: 11px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #263b5c;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .nav a:hover {
+            color: #1760db;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .login-btn {
+            text-decoration: none;
+            color: #1760db;
+            font-weight: 600;
+            margin-right: 18px;
+            font-size: 14px;
+        }
+
+        .register-btn {
+            text-decoration: none;
+            background: #1760db;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 9px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .register-btn:hover {
+            background: #0e4fbf;
+        }
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .page-section {
+            padding: 55px 20px 75px;
+            min-height: calc(100vh - 82px);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .small-title {
+            display: inline-block;
+            color: #1760db;
+            background: #edf4ff;
+            padding: 7px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.3px;
+            margin-bottom: 13px;
+        }
+
+        .page-title h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: #10203c;
+        }
+
+        .page-title p {
+            color: #687b9b;
+            font-size: 16px;
+            max-width: 650px;
+            margin: auto;
+        }
+
+        /* =====================================================
+           FORM CONTAINER
+        ===================================================== */
+
+        .form-container {
+            max-width: 920px;
+            margin: auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 18px;
+
+            box-shadow:
+                0 12px 40px
+                rgba(20, 54, 100, 0.09);
+
+            border: 1px solid #e5ebf4;
+        }
+
+        .form-heading {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #edf1f7;
+        }
+
+        .form-heading h2 {
+            font-size: 24px;
+            color: #12213f;
+            margin-bottom: 6px;
+        }
+
+        .form-heading p {
+            color: #71819d;
+            font-size: 14px;
+        }
+
+        /* =====================================================
+           USER INFO
+        ===================================================== */
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            background: #f7faff;
+            border: 1px solid #e1eaf8;
+
+            padding: 13px 15px;
+            border-radius: 10px;
+
+            margin-bottom: 25px;
+        }
+
+        .user-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+
+            background: #1760db;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 700;
+        }
+
+        .user-info-text small {
+            display: block;
+            color: #8090aa;
+            font-size: 11px;
+            margin-bottom: 2px;
+        }
+
+        .user-info-text strong {
+            color: #253957;
+            font-size: 14px;
+        }
+
+        /* =====================================================
+           SELECTED SERVICE
+        ===================================================== */
+
+        .selected-service {
+            background: linear-gradient(
+                135deg,
+                #f0f6ff,
+                #f8fbff
+            );
+
+            border: 1px solid #d9e7fb;
+
+            padding: 16px 18px;
+            border-radius: 11px;
+
+            margin-bottom: 25px;
+        }
+
+        .selected-service-label {
+            color: #7b8ca7;
+            font-size: 11px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 1px;
+
+            margin-bottom: 4px;
+        }
+
+        .selected-service-name {
+            color: #1760db;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        /* =====================================================
+           ERROR
+        ===================================================== */
+
+        .error-box {
+            background: #fff2f2;
+            border: 1px solid #ffd4d4;
+
+            color: #c62828;
+
+            padding: 13px 15px;
+            border-radius: 9px;
+
+            margin-bottom: 22px;
+
+            font-size: 14px;
+        }
+
+        /* =====================================================
+           FORM GRID
+        ===================================================== */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 600;
+
+            color: #253957;
+
+            margin-bottom: 8px;
+        }
+
+        label span {
+            color: #e63946;
+        }
+
+        input,
+        select,
+        textarea {
+
+            width: 100%;
+
+            border: 1px solid #dce4ef;
+
+            border-radius: 9px;
+
+            padding: 13px 14px;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            font-size: 14px;
+
+            color: #263b5c;
+
+            background: #ffffff;
+
+            outline: none;
+
+            transition: all 0.2s ease;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+
+            border-color: #1760db;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(23, 96, 219, 0.08);
+        }
+
+        input:hover,
+        select:hover,
+        textarea:hover {
+            border-color: #b9c8dc;
+        }
+
+        input[readonly] {
+            background: #f7f9fc;
+            color: #526783;
+        }
+
+        ::placeholder {
+            color: #a0adbf;
+        }
+
+        textarea {
+            min-height: 125px;
+            resize: vertical;
+        }
+
+        /* =====================================================
+           LOCATION
+        ===================================================== */
+
+        .location-box {
+            display: flex;
+            gap: 10px;
+        }
+
+        .location-box input {
+            flex: 1;
+        }
+
+        .location-btn {
+
+            border: 1px solid #d7e5fa;
+
+            background: #edf4ff;
+
+            color: #1760db;
+
+            padding: 0 18px;
+
+            border-radius: 9px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            white-space: nowrap;
+
+            transition: 0.2s;
+        }
+
+        .location-btn:hover {
+            background: #dceaff;
+        }
+
+        .location-btn:disabled {
+            opacity: 0.7;
+            cursor: wait;
+        }
+
+        #locationStatus {
+
+            display: block;
+
+            margin-top: 8px;
+
+            font-size: 13px;
+
+            color: #687b9b;
+        }
+
+        /* =====================================================
+           EMERGENCY BOX
+        ===================================================== */
+
+        .emergency-box {
+
+            margin-top: 27px;
+
+            background: #f7faff;
+
+            border: 1px solid #dfe9f8;
+
+            padding: 18px;
+
+            border-radius: 10px;
+        }
+
+        .emergency-box h3 {
+
+            font-size: 15px;
+
+            color: #1760db;
+
+            margin-bottom: 6px;
+        }
+
+        .emergency-box p {
+
+            font-size: 13px;
+
+            color: #687b9b;
+
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           SUBMIT
+        ===================================================== */
+
+        .submit-area {
+
+            margin-top: 28px;
+
+            display: flex;
+
+            justify-content: flex-end;
+        }
+
+        .submit-btn {
+
+            border: none;
+
+            background: #1760db;
+
+            color: white;
+
+            padding: 15px 30px;
+
+            border-radius: 9px;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 20px
+                rgba(23, 96, 219, 0.20);
+
+            transition: 0.2s;
+        }
+
+        .submit-btn:hover {
+
+            background: #0e4fbf;
+
+            transform: translateY(-1px);
+        }
+
+        /* =====================================================
+           BACK
+        ===================================================== */
+
+        .back-area {
+
+            text-align: center;
+
+            margin-top: 24px;
+        }
+
+        .back-area a {
+
+            color: #1760db;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+        .back-area a:hover {
+            text-decoration: underline;
+        }
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+
+            background: #091328;
+
+            color: white;
+
+            padding: 45px 7% 20px;
+        }
+
+        .footer-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                2fr 1fr 1fr 1fr;
+
+            gap: 40px;
+        }
+
+        .footer-column h2 {
+
+            font-size: 22px;
+
+            margin-bottom: 12px;
+        }
+
+        .footer-column h3 {
+
+            font-size: 14px;
+
+            margin-bottom: 17px;
+        }
+
+        .footer-column p {
+
+            color: #8fa2c2;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+            margin-bottom: 5px;
+        }
+
+        .footer-column a {
+
+            display: block;
+
+            text-decoration: none;
+
+            color: #8fa2c2;
+
+            font-size: 13px;
+
+            margin-bottom: 11px;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .copyright {
+
+            border-top: 1px solid #1c2940;
+
+            margin-top: 35px;
+
+            padding-top: 18px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            color: #71819d;
+
+            font-size: 12px;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            header {
+                padding: 0 25px;
+            }
+
+            .nav {
+                display: none;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            header {
+                min-height: 70px;
+            }
+
+            .logo-text p {
+                display: none;
+            }
+
+            .login-btn {
+                display: none;
+            }
+
+            .register-btn {
+                padding: 10px 15px;
+            }
+
+            .page-section {
+                padding: 35px 15px 50px;
+            }
+
+            .page-title h1 {
+                font-size: 29px;
+            }
+
+            .page-title p {
+                font-size: 14px;
+            }
+
+            .form-container {
+                padding: 25px 18px;
+                border-radius: 14px;
+            }
+
+            .form-heading h2 {
+                font-size: 21px;
+            }
+
+            .location-box {
+                flex-direction: column;
+            }
+
+            .location-btn {
+                padding: 12px;
+            }
+
+            .submit-area {
+                justify-content: stretch;
+            }
+
+            .submit-btn {
+                width: 100%;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .copyright {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+    <div class="logo-area">
+
+        <div class="logo-box"></div>
+
+        <div class="logo-text">
+
+            <h2>
+                VBA
+            </h2>
+
+            <p>
+                Vehicle Breakdown Assistant
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <nav class="nav">
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+        <a href="{% url 'home' %}#services">
+            Services
+        </a>
+
+        <a href="{% url 'home' %}#how-it-works">
+            How It Works
+        </a>
+
+        <a href="{% url 'home' %}#about">
+            About
+        </a>
+
+        <a href="{% url 'home' %}#contact">
+            Contact
+        </a>
+
+    </nav>
+
+
+    <div class="header-actions">
+
+        <a
+            href="{% url 'login' %}"
+            class="login-btn"
+        >
+            Login
+        </a>
+
+        <a
+            href="{% url 'register' %}"
+            class="register-btn"
+        >
+            Register
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     PAGE
+===================================================== -->
+
+<section class="page-section">
+
+
+    <div class="page-title">
+
+        <div class="small-title">
+            EMERGENCY ASSISTANCE
+        </div>
+
+        <h1>
+            Request Roadside Assistance
+        </h1>
+
+        <p>
+            Tell us about your vehicle problem and we'll connect you
+            with a nearby service provider.
+        </p>
+
+    </div>
+
+
+    <div class="form-container">
+
+
+        <div class="form-heading">
+
+            <h2>
+                Assistance Request Form
+            </h2>
+
+            <p>
+                Please provide accurate information so we can help you quickly.
+            </p>
+
+        </div>
+
+
+        <!-- USER INFO -->
+
+        <div class="user-info">
+
+            <div class="user-icon">
+                {{ request.user.username|first|upper }}
+            </div>
+
+            <div class="user-info-text">
+
+                <small>
+                    Requesting assistance as
+                </small>
+
+                <strong>
+                    {{ request.user.username }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- ERROR -->
+
+        {% if error %}
+
+            <div class="error-box">
+                {{ error }}
+            </div>
+
+        {% endif %}
+
+
+        <!-- FORM -->
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <div class="form-grid">
+
+
+                <!-- CUSTOMER NAME -->
+
+                <div class="form-group">
+
+                    <label>
+                        Customer Name
+                        <span>*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        name="customer_name"
+                        value="{{ request.user.username }}"
+                        readonly
+                    >
+
+                </div>
+
+
+                <!-- MOBILE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Mobile Number
+                        <span>*</span>
+                    </label>
+
+                    <input
+                        type="tel"
+                        name="mobile"
+                        value="{{ mobile|default:'' }}"
+                        placeholder="Enter 10 digit mobile number"
+                        maxlength="10"
+                        pattern="[0-9]{10}"
+                        inputmode="numeric"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- VEHICLE NUMBER -->
+
+                <div class="form-group">
+
+                    <label>
+                        Vehicle Number
+                        <span>*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        name="vehicle_number"
+                        value="{{ vehicle_number|default:'' }}"
+                        placeholder="Example: MH12AB1234"
+                        maxlength="15"
+                        style="text-transform: uppercase;"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- VEHICLE TYPE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Vehicle Type
+                        <span>*</span>
+                    </label>
+
+                    <select
+                        name="vehicle_type"
+                        required
+                    >
+
+                        <option value="">
+                            Select Vehicle Type
+                        </option>
+
+                        <option
+                            value="Car"
+                            {% if vehicle_type == "Car" %}
+                                selected
+                            {% endif %}
+                        >
+                            Car
+                        </option>
+
+                        <option
+                            value="Auto"
+                            {% if vehicle_type == "Auto" %}
+                                selected
+                            {% endif %}
+                        >
+                            Auto Rickshaw
+                        </option>
+
+                        <option
+                            value="Truck"
+                            {% if vehicle_type == "Truck" %}
+                                selected
+                            {% endif %}
+                        >
+                            Truck
+                        </option>
+
+                        <option
+                            value="Bus"
+                            {% if vehicle_type == "Bus" %}
+                                selected
+                            {% endif %}
+                        >
+                            Bus
+                        </option>
+
+                        <option
+                            value="Other"
+                            {% if vehicle_type == "Other" %}
+                                selected
+                            {% endif %}
+                        >
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- SERVICE -->
+
+                <div class="form-group full-width">
+
+                    <label>
+                        Service Required
+                        <span>*</span>
+                    </label>
+
+
+                    {% if service_selected %}
+
+                        <div class="selected-service">
+
+                            <div class="selected-service-label">
+                                Selected Service
+                            </div>
+
+                            <div class="selected-service-name">
+                                {{ selected_service }}
+                            </div>
+
+                        </div>
+
+
+                        <input
+                            type="hidden"
+                            name="service"
+                            value="{{ selected_service }}"
+                        >
+
+                    {% else %}
+
+                        <select
+                            name="service"
+                            required
+                        >
+
+                            <option value="">
+                                Select Assistance Service
+                            </option>
+
+                            <option value="Mechanical Assistance">
+                                Mechanical Assistance
+                            </option>
+
+                            <option value="Battery Assistance">
+                                Battery Assistance
+                            </option>
+
+                            <option value="Tyre Assistance">
+                                Tyre Assistance
+                            </option>
+
+                            <option value="Fuel Assistance">
+                                Fuel Assistance
+                            </option>
+
+                            <option value="Towing Service">
+                                Towing Service
+                            </option>
+
+                            <option value="Lockout Assistance">
+                                Lockout Assistance
+                            </option>
+
+                        </select>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- =================================================
+                     CUSTOMER LOCATION
+                ================================================== -->
+
+                <div class="form-group full-width">
+
+                    <label>
+                        Customer Location
+                        <span>*</span>
+                    </label>
+
+
+                    <div class="location-box">
+
+                        <input
+                            type="text"
+                            id="location"
+                            name="location"
+                            value="{{ location|default:'' }}"
+                            placeholder="Click Use My Location"
+                            required
+                        >
+
+
+                        <button
+                            type="button"
+                            class="location-btn"
+                            onclick="getLocation()"
+                        >
+                            📍 Use My Location
+                        </button>
+
+                    </div>
+
+
+                    <small id="locationStatus">
+                    </small>
+
+                </div>
+
+
+                <!-- PROBLEM -->
+
+                <div class="form-group full-width">
+
+                    <label>
+                        Problem Description
+                    </label>
+
+                    <textarea
+                        name="problem"
+                        placeholder="Describe what happened to your vehicle..."
+                    >{{ problem|default:'' }}</textarea>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- EMERGENCY BOX -->
+
+            <div class="emergency-box">
+
+                <h3>
+                    Emergency Assistance
+                </h3>
+
+                <p>
+                    After submitting your request, our system will create
+                    a unique VBA Request ID and process your assistance
+                    request. An available service provider can then be
+                    assigned to your request.
+                </p>
+
+            </div>
+
+
+            <!-- SUBMIT -->
+
+            <div class="submit-area">
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                >
+                    Submit Assistance Request
+                </button>
+
+            </div>
+
+
+        </form>
+
+
+        <!-- BACK -->
+
+        <div class="back-area">
+
+            <a href="{% url 'home' %}">
+                ← Back to Home
+            </a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+
+    <div class="footer-grid">
+
+
+        <!-- COMPANY -->
+
+        <div class="footer-column">
+
+            <h2>
+                VBA
+            </h2>
+
+            <p>
+                Vehicle Breakdown Assistant Management System
+            </p>
+
+            <p>
+                Fast, reliable and professional roadside assistance.
+            </p>
+
+        </div>
+
+
+        <!-- QUICK LINKS -->
+
+        <div class="footer-column">
+
+            <h3>
+                Quick Links
+            </h3>
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'home' %}#services">
+                Services
+            </a>
+
+            <a href="{% url 'home' %}#how-it-works">
+                How It Works
+            </a>
+
+            <a href="{% url 'home' %}#about">
+                About
+            </a>
+
+        </div>
+
+
+        <!-- SERVICES -->
+
+        <div class="footer-column">
+
+            <h3>
+                Our Services
+            </h3>
+
+            <a href="{% url 'home' %}#services">
+                Mechanical Assistance
+            </a>
+
+            <a href="{% url 'home' %}#services">
+                Battery Assistance
+            </a>
+
+            <a href="{% url 'home' %}#services">
+                Tyre Assistance
+            </a>
+
+            <a href="{% url 'home' %}#services">
+                Fuel Assistance
+            </a>
+
+            <a href="{% url 'home' %}#services">
+                Towing Service
+            </a>
+
+        </div>
+
+
+        <!-- EMERGENCY -->
+
+        <div class="footer-column">
+
+            <h3>
+                Emergency Assistance
+            </h3>
+
+            <a href="#">
+                Available 24/7
+            </a>
+
+            <a href="#">
+                Location Based Assistance
+            </a>
+
+            <a href="#">
+                Verified Mechanics
+            </a>
+
+            <a href="#">
+                Quick Response
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- COPYRIGHT -->
+
+    <div class="copyright">
+
+        <span>
+            © 2026 Vehicle Breakdown Assistant.
+            All Rights Reserved.
+        </span>
+
+        <span>
+            Built for safer and smarter journeys.
+        </span>
+
+    </div>
+
+
+</footer>
+
+
+<!-- =====================================================
+     CURRENT LOCATION SCRIPT
+===================================================== -->
+
+<script>
+
+function getLocation() {
+
+    const locationInput =
+        document.getElementById("location");
+
+    const locationStatus =
+        document.getElementById("locationStatus");
+
+    const locationButton =
+        document.querySelector(".location-btn");
+
+
+    /*
+     * CHECK BROWSER SUPPORT
+     */
+
+    if (!navigator.geolocation) {
+
+        locationStatus.innerText =
+            "❌ Geolocation is not supported by your browser.";
+
+        return;
+    }
+
+
+    /*
+     * LOADING
+     */
+
+    locationInput.value =
+        "Detecting your current location...";
+
+    locationStatus.innerText =
+        "Please allow location permission.";
+
+    locationButton.disabled = true;
+
+    locationButton.innerText =
+        "Getting Location...";
+
+
+    /*
+     * GET CURRENT GPS LOCATION
+     */
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+            const latitude =
+                position.coords.latitude;
+
+            const longitude =
+                position.coords.longitude;
+
+
+            locationStatus.innerText =
+                "Location detected. Finding address...";
+
+
+            /*
+             * OPENSTREETMAP REVERSE GEOCODING
+             */
+
+            const apiUrl =
+                "https://nominatim.openstreetmap.org/reverse" +
+                "?format=jsonv2" +
+                "&lat=" +
+                encodeURIComponent(latitude) +
+                "&lon=" +
+                encodeURIComponent(longitude) +
+                "&zoom=18" +
+                "&addressdetails=1";
+
+
+            fetch(apiUrl, {
+
+                headers: {
+                    "Accept": "application/json"
+                }
+
+            })
+
+
+            .then(function(response) {
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Unable to find address."
+                    );
+                }
+
+                return response.json();
+
+            })
+
+
+            .then(function(data) {
+
+
+                /*
+                 * READABLE ADDRESS
+                 */
+
+                if (
+                    data &&
+                    data.display_name
+                ) {
+
+                    locationInput.value =
+                        data.display_name;
+
+                    locationStatus.innerText =
+                        "✓ Customer location detected successfully.";
+
+                }
+
+                else {
+
+                    /*
+                     * GPS FALLBACK
+                     */
+
+                    locationInput.value =
+                        "Latitude: " +
+                        latitude.toFixed(6) +
+                        ", Longitude: " +
+                        longitude.toFixed(6);
+
+                    locationStatus.innerText =
+                        "Location detected, but readable address was not available.";
+                }
+
+            })
+
+
+            .catch(function(error) {
+
+                console.error(
+                    "Location error:",
+                    error
+                );
+
+
+                /*
+                 * GPS FALLBACK
+                 */
+
+                locationInput.value =
+                    "Latitude: " +
+                    latitude.toFixed(6) +
+                    ", Longitude: " +
+                    longitude.toFixed(6);
+
+                locationStatus.innerText =
+                    "GPS location detected, but address could not be loaded.";
+
+            })
+
+
+            .finally(function() {
+
+                locationButton.disabled = false;
+
+                locationButton.innerText =
+                    "📍 Use My Location";
+
+            });
+
+        },
+
+
+        /*
+         * LOCATION ERROR
+         */
+
+        function(error) {
+
+            locationInput.value = "";
+
+            locationButton.disabled = false;
+
+            locationButton.innerText =
+                "📍 Use My Location";
+
+
+            if (error.code === 1) {
+
+                locationStatus.innerText =
+                    "❌ Location permission denied. Please allow location access in Chrome.";
+
+            }
+
+
+            else if (error.code === 2) {
+
+                locationStatus.innerText =
+                    "❌ Location unavailable. Please check device location settings.";
+
+            }
+
+
+            else if (error.code === 3) {
+
+                locationStatus.innerText =
+                    "❌ Location request timed out. Please try again.";
+
+            }
+
+
+            else {
+
+                locationStatus.innerText =
+                    "❌ Unable to get your current location.";
+            }
+
+        },
+
+
+        /*
+         * LOCATION OPTIONS
+         */
+
+        {
+            enableHighAccuracy: true,
+            timeout: 30000,
+            maximumAge: 0
+        }
+
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

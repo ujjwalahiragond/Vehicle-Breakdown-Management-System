@@ -1,0 +1,1573 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vehicle Breakdown Assistant | M.K GARAGE</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f8fc;
+            color: #172b4d;
+            line-height: 1.6;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: #ffffff;
+            min-height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 7%;
+            border-bottom: 1px solid #e4e9f0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-box {
+            width: 44px;
+            height: 44px;
+            background: #1760db;
+            border-radius: 10px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .logo-box::after {
+            content: "VBA";
+            position: absolute;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            left: 7px;
+            top: 12px;
+        }
+
+        .logo-text p {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1760db;
+        }
+
+        .logo-text span {
+            display: block;
+            font-size: 11px;
+            color: #667894;
+            margin-top: 2px;
+            font-weight: 600;
+        }
+
+        /* ================= NAVIGATION ================= */
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #243b5a;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav a:hover {
+            color: #1760db;
+        }
+
+        .login-btn {
+            text-decoration: none;
+            background: #1760db;
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .login-btn:hover {
+            background: #0e4fbf;
+        }
+
+        .admin-btn {
+            text-decoration: none;
+            background: #10203c;
+            color: white !important;
+            padding: 10px 18px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .admin-btn:hover {
+            background: #243b5a;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            background: white;
+            padding: 70px 7%;
+        }
+
+        .hero-container {
+            max-width: 1350px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            gap: 45px;
+            align-items: center;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-label {
+            color: #1760db;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            line-height: 1.15;
+            color: #10203c;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            color: #667894;
+            font-size: 16px;
+            max-width: 600px;
+            margin-bottom: 28px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            text-decoration: none;
+            padding: 13px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: #1760db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0e4fbf;
+        }
+
+        .btn-secondary {
+            background: #edf4ff;
+            color: #1760db;
+        }
+
+        .btn-secondary:hover {
+            background: #dceaff;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 500px;
+            object-fit: contain;
+            border-radius: 20px;
+            display: block;
+        }
+
+        /* ================= GENERAL SECTION ================= */
+
+        .section-container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-title span {
+            color: #1760db;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            color: #10203c;
+            margin-top: 8px;
+        }
+
+        .section-title p {
+            color: #71819d;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        /* ================= ABOUT ================= */
+
+        .about {
+            padding: 65px 7%;
+            background: #f5f8fc;
+        }
+
+        .about-box {
+            background: white;
+            padding: 30px;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .about-box p {
+            color: #667894;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .about-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ================= SERVICES ================= */
+
+        .services {
+            padding: 65px 7%;
+            background: white;
+        }
+
+        .services-grid {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .service-card {
+            background: #f8faff;
+            border: 1px solid #e1e8f2;
+            border-radius: 13px;
+            padding: 22px;
+            transition: 0.2s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(30, 60, 100, 0.08);
+        }
+
+        .service-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 9px;
+            margin-bottom: 15px;
+        }
+
+        .service-card h3 {
+            color: #162b4b;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .service-card p {
+            color: #71819d;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .service-card a {
+            display: inline-block;
+            text-decoration: none;
+            color: #1760db;
+            font-size: 13px;
+            font-weight: bold;
+            padding: 8px 0;
+        }
+
+        .service-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= HOW IT WORKS ================= */
+
+        .how-it-works {
+            padding: 65px 7%;
+            background: #f5f8fc;
+        }
+
+        .steps {
+            max-width: 950px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .step {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 25px 18px;
+            text-align: center;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 15px;
+            background: #edf4ff;
+            color: #1760db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .step h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #162b4b;
+        }
+
+        .step p {
+            font-size: 13px;
+            color: #71819d;
+        }
+
+        /* ================= GARAGE ================= */
+
+        .garage-location {
+            padding: 65px 7%;
+            background: white;
+        }
+
+        .garage-box {
+            max-width: 1100px;
+            margin: auto;
+            background: #f8faff;
+            border: 1px solid #dfe8f5;
+            border-radius: 15px;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .garage-photo {
+            grid-column: 1 / -1;
+            text-align: center;
+        }
+
+        .garage-photo img {
+            width: 100%;
+            max-width: 1000px;
+            height: 420px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 1px solid #dfe8f5;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            display: block;
+            margin: auto;
+        }
+
+        .garage-info h3 {
+            color: #1760db;
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .garage-info h2 {
+            color: #10203c;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .garage-info p {
+            color: #667894;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .garage-info strong {
+            color: #243b5a;
+        }
+
+        .garage-map {
+            background: #edf4ff;
+            border-radius: 13px;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 25px;
+        }
+
+        .garage-icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+
+        .garage-map h3 {
+            color: #10203c;
+            margin-bottom: 8px;
+        }
+
+        .garage-map p {
+            color: #71819d;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .map-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #1760db;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .map-btn:hover {
+            background: #0e4fbf;
+        }
+
+        /* ================= TRACKING ================= */
+
+        .tracking {
+            padding: 65px 7%;
+            background: #f5f8fc;
+        }
+
+        .tracking-box {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            border: 1px solid #dfe8f5;
+            border-radius: 15px;
+            padding: 35px;
+            text-align: center;
+        }
+
+        .tracking-box h2 {
+            color: #10203c;
+            margin-bottom: 10px;
+        }
+
+        .tracking-box p {
+            color: #71819d;
+            font-size: 14px;
+            margin-bottom: 22px;
+        }
+
+        .track-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #1760db;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .track-btn:hover {
+            background: #0e4fbf;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #10203c;
+            color: white;
+            text-align: center;
+            padding: 25px 20px;
+        }
+
+        footer h3 {
+            margin-bottom: 5px;
+        }
+
+        footer p {
+            color: #a9b7cc;
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+
+        /* ================= TABLET ================= */
+
+        @media (max-width: 900px) {
+
+            .hero-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero-image {
+                height: 450px;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .garage-box {
+                grid-template-columns: 1fr;
+            }
+
+            .garage-photo {
+                grid-column: auto;
+            }
+
+            .garage-photo img {
+                height: 350px;
+            }
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 10px 20px;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav {
+                gap: 8px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav a {
+                font-size: 11px;
+            }
+
+            .login-btn,
+            .admin-btn {
+                padding: 8px 10px;
+            }
+
+            .logo-text p {
+                font-size: 12px;
+            }
+
+            .logo-text span {
+                font-size: 9px;
+            }
+
+            .hero {
+                padding: 50px 20px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero-image {
+                height: 350px;
+                border-radius: 15px;
+            }
+
+            .about,
+            .services,
+            .how-it-works,
+            .garage-location,
+            .tracking {
+                padding: 50px 20px;
+            }
+
+            .section-title h2 {
+                font-size: 27px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .garage-box {
+                padding: 20px;
+            }
+
+            .garage-photo img {
+                height: 250px;
+                border-radius: 10px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                text-align: center;
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-box"></div>
+
+        <div class="logo-text">
+
+            <p>
+                Vehicle Breakdown Assistant
+            </p>
+
+            <span>
+                M.K GARAGE • Jath, Sangli
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         PROFESSIONAL ROLE-BASED NAVIGATION
+    ================================================== -->
+
+    <nav class="nav">
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+        <a href="#garage-location">
+            Garage Location
+        </a>
+
+        {% if user.is_authenticated %}
+
+            {% if user.is_staff %}
+
+                <a href="{% url 'admin_dashboard' %}"
+                   class="admin-btn">
+                    Admin Dashboard
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'user_dashboard' %}"
+                   class="login-btn">
+                    Customer Dashboard
+                </a>
+
+            {% endif %}
+
+            <a href="{% url 'logout' %}"
+               class="login-btn">
+                Logout
+            </a>
+
+        {% else %}
+
+            <a href="{% url 'login' %}"
+               class="login-btn">
+                Login
+            </a>
+
+            <a href="{% url 'register' %}"
+               class="login-btn">
+                Register
+            </a>
+
+        {% endif %}
+
+    </nav>
+
+</header>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <div class="hero-container">
+
+        <div class="hero-content">
+
+            <div class="hero-label">
+                VEHICLE BREAKDOWN ASSISTANT
+            </div>
+
+            <h1>
+                Vehicle Breakdown?<br>
+                Get Assistance Quickly.
+            </h1>
+
+            <p>
+                Vehicle Breakdown Assistant helps vehicle owners
+                request roadside assistance and track their service
+                request through a simple online system.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a
+                    href="{% url 'request_assistance' %}"
+                    class="btn-primary"
+                >
+                    Request Assistance
+                </a>
+
+                <a
+                    href="{% url 'user_dashboard' %}"
+                    class="btn-secondary"
+                >
+                    Track My Request
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <img
+                src="{% static 'images/home.jpeg' %}"
+                alt="Vehicle Breakdown Assistance"
+                class="hero-image"
+            >
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section
+    id="about"
+    class="about"
+>
+
+    <div class="section-container">
+
+        <div class="section-title">
+
+            <span>
+                ABOUT
+            </span>
+
+            <h2>
+                Vehicle Breakdown Assistant
+            </h2>
+
+            <p>
+                Reliable roadside assistance when you need it most.
+            </p>
+
+        </div>
+
+
+        <div class="about-box">
+
+            <p>
+                <strong>M.K. Garage, Jath, Sangli, Maharashtra</strong>
+                is dedicated to making your journey safer, easier and
+                worry-free. A vehicle breakdown can happen anytime and
+                anywhere. Our Vehicle Breakdown Assistant helps you quickly
+                request the right roadside service and get assistance when
+                you need it most.
+            </p>
+
+            <p>
+                Whether you are facing a
+                <strong>
+                    mechanical problem,
+                    battery failure,
+                    flat tyre,
+                    fuel emergency,
+                    vehicle lockout or towing requirement
+                </strong>,
+                M.K. Garage is here to provide dependable roadside support.
+                We focus on quick assistance, reliable service and customer
+                convenience.
+            </p>
+
+            <p>
+                With our digital assistance system, customers can easily
+                enter their vehicle details, select the required service,
+                share their location and submit a request. The request can
+                then be tracked using a unique Request ID, making the
+                assistance process simple and transparent.
+            </p>
+
+            <p>
+                <strong>Your journey matters to us.</strong>
+                Our goal is to reduce the stress of unexpected vehicle
+                problems and help you get back on the road with confidence.
+                With M.K. Garage, reliable roadside assistance is just a
+                request away.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SERVICES
+===================================================== -->
+
+<section
+    id="services"
+    class="services"
+>
+
+    <div class="section-title">
+
+        <span>
+            SERVICES
+        </span>
+
+        <h2>
+            Roadside Assistance Services
+        </h2>
+
+        <p>
+            Explore our services and choose the assistance you need.
+        </p>
+
+    </div>
+
+
+    <div class="services-grid">
+
+
+        <!-- Mechanical -->
+
+        <div class="service-card">
+
+            <img
+                src="{% static 'images/service-mechanical.jpeg' %}"
+                alt="Mechanical Assistance"
+                class="service-image"
+            >
+
+            <h3>
+                Mechanical Assistance
+            </h3>
+
+            <p>
+                Professional assistance for common mechanical
+                vehicle problems and breakdowns.
+            </p>
+
+            <a href="{% url 'service_detail' 'Mechanical Assistance' %}">
+                View Details →
+            </a>
+
+        </div>
+
+
+        <!-- Battery -->
+
+        <div class="service-card">
+
+            <img
+                src="{% static 'images/service-battery.png' %}"
+                alt="Battery Assistance"
+                class="service-image"
+            >
+
+            <h3>
+                Battery Assistance
+            </h3>
+
+            <p>
+                Help for battery failure, jump-start and related
+                battery problems.
+            </p>
+
+            <a href="{% url 'service_detail' 'Battery Assistance' %}">
+                View Details →
+            </a>
+
+        </div>
+
+
+        <!-- Tyre -->
+
+        <div class="service-card">
+
+            <img
+                src="{% static 'images/service-tyre.png' %}"
+                alt="Tyre Assistance"
+                class="service-image"
+            >
+
+            <h3>
+                Tyre Assistance
+            </h3>
+
+            <p>
+                Assistance for flat tyres, punctures and
+                tyre-related problems.
+            </p>
+
+            <a href="{% url 'service_detail' 'Tyre Assistance' %}">
+                View Details →
+            </a>
+
+        </div>
+
+
+        <!-- Fuel -->
+
+        <div class="service-card">
+
+            <img
+                src="{% static 'images/service-fuel.png' %}"
+                alt="Fuel Assistance"
+                class="service-image"
+            >
+
+            <h3>
+                Fuel Assistance
+            </h3>
+
+            <p>
+                Emergency assistance when your vehicle
+                runs out of fuel.
+            </p>
+
+            <a href="{% url 'service_detail' 'Fuel Assistance' %}">
+                View Details →
+            </a>
+
+        </div>
+
+
+        <!-- Towing -->
+
+        <div class="service-card">
+
+            <img
+                src="{% static 'images/service-towing.png' %}"
+                alt="Towing Service"
+                class="service-image"
+            >
+
+            <h3>
+                Towing Service
+            </h3>
+
+            <p>
+                Safe vehicle towing when the vehicle
+                cannot continue driving.
+            </p>
+
+            <a href="{% url 'service_detail' 'Towing Service' %}">
+                View Details →
+            </a>
+
+        </div>
+
+
+        <!-- Lockout -->
+
+        <div class="service-card">
+
+            <img
+                src="{% static 'images/service-lockout.jpeg' %}"
+                alt="Lockout Assistance"
+                class="service-image"
+            >
+
+            <h3>
+                Lockout Assistance
+            </h3>
+
+            <p>
+                Assistance when vehicle keys are locked
+                inside the vehicle.
+            </p>
+
+            <a href="{% url 'service_detail' 'Lockout Assistance' %}">
+                View Details →
+            </a>
+
+        </div>
+
+
+        <!-- Engine Overheating -->
+
+        <div class="service-card">
+
+            <div
+                class="service-image"
+                style="
+                    background:#edf4ff;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    font-size:55px;
+                "
+            >
+                🌡️
+            </div>
+
+            <h3>
+                Engine Overheating
+            </h3>
+
+            <p>
+                Assistance for overheating engines and
+                cooling system problems.
+            </p>
+
+            <a href="{% url 'service_detail' 'Engine Overheating' %}">
+                View Details →
+            </a>
+
+        </div>
+
+
+        <!-- Accident -->
+
+        <div class="service-card">
+
+            <div
+                class="service-image"
+                style="
+                    background:#fff1f1;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    font-size:55px;
+                "
+            >
+                🚗
+            </div>
+
+            <h3>
+                Accident Assistance
+            </h3>
+
+            <p>
+                Roadside assistance after a vehicle
+                accident or emergency.
+            </p>
+
+            <a href="{% url 'service_detail' 'Accident Assistance' %}">
+                View Details →
+            </a>
+
+        </div>
+
+
+        <!-- Fuel Delivery -->
+
+        <div class="service-card">
+
+            <div
+                class="service-image"
+                style="
+                    background:#fff8e8;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    font-size:55px;
+                "
+            >
+                ⛽
+            </div>
+
+            <h3>
+                Fuel Delivery
+            </h3>
+
+            <p>
+                Emergency fuel delivery directly
+                to your vehicle location.
+            </p>
+
+            <a href="{% url 'service_detail' 'Fuel Delivery' %}">
+                View Details →
+            </a>
+
+        </div>
+
+
+        <!-- Emergency Roadside -->
+
+        <div class="service-card">
+
+            <div
+                class="service-image"
+                style="
+                    background:#fff1f1;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    font-size:55px;
+                "
+            >
+                🆘
+            </div>
+
+            <h3>
+                Emergency Roadside
+            </h3>
+
+            <p>
+                General roadside assistance for
+                unexpected vehicle problems.
+            </p>
+
+            <a href="{% url 'service_detail' 'Emergency Roadside' %}">
+                View Details →
+            </a>
+
+        </div>
+
+
+        <!-- Vehicle Inspection -->
+
+        <div class="service-card">
+
+            <div
+                class="service-image"
+                style="
+                    background:#edf4ff;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    font-size:55px;
+                "
+            >
+                🔍
+            </div>
+
+            <h3>
+                Vehicle Inspection
+            </h3>
+
+            <p>
+                Basic inspection to identify possible
+                vehicle problems.
+            </p>
+
+            <a href="{% url 'service_detail' 'Vehicle Inspection' %}">
+                View Details →
+            </a>
+
+        </div>
+
+
+        <!-- Roadside Support -->
+
+        <div class="service-card">
+
+            <div
+                class="service-image"
+                style="
+                    background:#edf4ff;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    font-size:55px;
+                "
+            >
+                🛠️
+            </div>
+
+            <h3>
+                Roadside Support
+            </h3>
+
+            <p>
+                General roadside support for
+                vehicle owners.
+            </p>
+
+            <a href="{% url 'service_detail' 'Roadside Support' %}">
+                View Details →
+            </a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     HOW IT WORKS
+===================================================== -->
+
+<section
+    id="how-it-works"
+    class="how-it-works"
+>
+
+    <div class="section-title">
+
+        <span>
+            HOW IT WORKS
+        </span>
+
+        <h2>
+            Simple Assistance Process
+        </h2>
+
+        <p>
+            Follow these simple steps to request roadside assistance.
+        </p>
+
+    </div>
+
+
+    <div class="steps">
+
+
+        <div class="step">
+
+            <div class="step-number">
+                1
+            </div>
+
+            <h3>
+                Select Service
+            </h3>
+
+            <p>
+                Explore the available services and
+                select the service you need.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                2
+            </div>
+
+            <h3>
+                Submit Request
+            </h3>
+
+            <p>
+                Enter your personal and vehicle details
+                and submit your assistance request.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                3
+            </div>
+
+            <h3>
+                Mechanic Assigned
+            </h3>
+
+            <p>
+                Administrator reviews the request and
+                assigns an available mechanic.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                4
+            </div>
+
+            <h3>
+                Track Request
+            </h3>
+
+            <p>
+                Track your assistance request using
+                the unique VBA Request ID.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     GARAGE LOCATION
+===================================================== -->
+
+<section
+    id="garage-location"
+    class="garage-location"
+>
+
+    <div class="section-title">
+
+        <span>
+            GARAGE LOCATION
+        </span>
+
+        <h2>
+            M.K GARAGE – Jath, Sangli
+        </h2>
+
+        <p>
+            Your trusted local vehicle service partner.
+        </p>
+
+    </div>
+
+
+    <div class="garage-box">
+
+
+        <!-- ORIGINAL GARAGE PHOTO -->
+
+        <div class="garage-photo">
+
+            <img
+                src="{% static 'images/mk-garage.png' %}"
+                alt="M.K GARAGE - Jath, Sangli"
+            >
+
+        </div>
+
+
+        <!-- GARAGE INFORMATION -->
+
+        <div class="garage-info">
+
+            <h3>
+                🔧 M.K GARAGE
+            </h3>
+
+            <h2>
+                Jath, Sangli
+            </h2>
+
+            <br>
+
+            <p>
+                <strong>📍 Address:</strong>
+            </p>
+
+            <p>
+                Bhosale Vasti, Near Alphonsa School,
+                Sangola Road, Jath, Sangli,
+                Maharashtra - 416404
+            </p>
+
+            <br>
+
+            <p>
+                <strong>Garage:</strong>
+                M.K GARAGE
+            </p>
+
+            <p>
+                <strong>Location:</strong>
+                Near Alphonsa School, Jath
+            </p>
+
+        </div>
+
+
+        <!-- GOOGLE MAP -->
+
+        <div class="garage-map">
+
+            <div class="garage-icon">
+                📍
+            </div>
+
+            <h3>
+                M.K GARAGE
+            </h3>
+
+            <p>
+                Near Alphonsa School,
+                Jath, Sangli
+            </p>
+
+            <a
+                href="https://www.google.com/maps/search/?api=1&query=17.06739518,75.21511019"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="map-btn"
+            >
+                📍 View Garage Location
+            </a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     REQUEST TRACKING
+===================================================== -->
+
+<section
+    id="tracking"
+    class="tracking"
+>
+
+    <div class="section-title">
+
+        <span>
+            REQUEST TRACKING
+        </span>
+
+        <h2>
+            Track Your Assistance Request
+        </h2>
+
+        <p>
+            Check the current status of your submitted request.
+        </p>
+
+    </div>
+
+
+    <div class="tracking-box">
+
+        <h2>
+            Check Request Status
+        </h2>
+
+        <p>
+            Enter your Request ID to check the current
+            status of your roadside assistance request.
+        </p>
+
+        <a
+            href="{% url 'user_dashboard' %}"
+            class="track-btn"
+        >
+            Track Request
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <h3>
+        Vehicle Breakdown Assistant
+    </h3>
+
+    <p>
+        A web-based roadside assistance management system.
+    </p>
+
+    <p>
+        Available 24/7 • Location Based Assistance • Verified Mechanics
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

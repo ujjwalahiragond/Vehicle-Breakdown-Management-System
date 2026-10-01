@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Track Request</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background: #f4f7fb;
+
+            color: #111827;
+
+            padding: 35px;
+        }
+
+        .container {
+
+            max-width: 950px;
+
+            margin: auto;
+        }
+
+        .header {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 5px 18px rgba(0,0,0,0.07);
+        }
+
+        .header h1 {
+
+            color: #2563eb;
+
+            margin-bottom: 8px;
+        }
+
+        .request-id {
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            color: #374151;
+        }
+
+        .details {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 5px 18px rgba(0,0,0,0.07);
+        }
+
+        .details h2 {
+
+            margin-bottom: 20px;
+        }
+
+        .grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+        }
+
+        .detail {
+
+            background: #f8fafc;
+
+            padding: 15px;
+
+            border-radius: 9px;
+
+            border: 1px solid #e5e7eb;
+        }
+
+        .detail span {
+
+            display: block;
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            margin-bottom: 5px;
+        }
+
+        .detail strong {
+
+            font-size: 16px;
+        }
+
+        /* TIMELINE */
+
+        .tracking {
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 15px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 5px 18px rgba(0,0,0,0.07);
+        }
+
+        .tracking h2 {
+
+            margin-bottom: 30px;
+        }
+
+        .timeline {
+
+            position: relative;
+
+            padding-left: 35px;
+        }
+
+        .timeline::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 11px;
+
+            top: 5px;
+
+            bottom: 5px;
+
+            width: 3px;
+
+            background: #dbe3ee;
+        }
+
+        .step {
+
+            position: relative;
+
+            padding: 0 0 28px 25px;
+        }
+
+        .step:last-child {
+            padding-bottom: 0;
+        }
+
+        .circle {
+
+            position: absolute;
+
+            left: -32px;
+
+            top: 0;
+
+            width: 25px;
+
+            height: 25px;
+
+            border-radius: 50%;
+
+            background: #dbe3ee;
+
+            border: 4px solid white;
+
+            box-shadow:
+                0 0 0 2px #dbe3ee;
+        }
+
+        .step.completed .circle {
+
+            background: #16a34a;
+
+            box-shadow:
+                0 0 0 2px #16a34a;
+        }
+
+        .step.current .circle {
+
+            background: #2563eb;
+
+            box-shadow:
+                0 0 0 3px #93c5fd;
+        }
+
+        .step h3 {
+
+            margin-bottom: 5px;
+
+            color: #64748b;
+        }
+
+        .step.completed h3 {
+
+            color: #15803d;
+        }
+
+        .step.current h3 {
+
+            color: #2563eb;
+        }
+
+        .step p {
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+        /* PAYMENT */
+
+        .payment-box {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 5px 18px rgba(0,0,0,0.07);
+        }
+
+        .paid {
+
+            background: #f0fdf4;
+
+            border: 1px solid #bbf7d0;
+
+            padding: 18px;
+
+            border-radius: 10px;
+
+            color: #166534;
+
+            margin-bottom: 18px;
+        }
+
+        .pending {
+
+            background: #fff7ed;
+
+            border: 1px solid #fed7aa;
+
+            padding: 18px;
+
+            border-radius: 10px;
+
+            color: #c2410c;
+
+            margin-bottom: 18px;
+        }
+
+        .buttons {
+
+            display: flex;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+        }
+
+        .btn {
+
+            display: inline-block;
+
+            text-decoration: none;
+
+            padding: 13px 20px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+        }
+
+        .pay-btn {
+
+            background: #f59e0b;
+
+            color: white;
+        }
+
+        .receipt-btn {
+
+            background: #16a34a;
+
+            color: white;
+        }
+
+        .dashboard-btn {
+
+            background: #2563eb;
+
+            color: white;
+        }
+
+        .cancelled {
+
+            background: #fef2f2;
+
+            border: 1px solid #fecaca;
+
+            color: #b91c1c;
+
+            padding: 18px;
+
+            border-radius: 10px;
+
+        }
+
+        @media(max-width: 700px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h1>
+            Vehicle Breakdown Assistant
+        </h1>
+
+        <div class="request-id">
+            Request ID:
+            VBA-{{ request.id }}
+        </div>
+
+    </div>
+
+
+    <!-- REQUEST DETAILS -->
+
+    <div class="details">
+
+        <h2>
+            Request Details
+        </h2>
+
+
+        <div class="grid">
+
+
+            <div class="detail">
+
+                <span>
+                    Customer
+                </span>
+
+                <strong>
+                    {{ request.customer_name }}
+                </strong>
+
+            </div>
+
+
+            <div class="detail">
+
+                <span>
+                    Mobile
+                </span>
+
+                <strong>
+                    {{ request.mobile }}
+                </strong>
+
+            </div>
+
+
+            <div class="detail">
+
+                <span>
+                    Vehicle Number
+                </span>
+
+                <strong>
+                    {{ request.vehicle_number }}
+                </strong>
+
+            </div>
+
+
+            <div class="detail">
+
+                <span>
+                    Vehicle Type
+                </span>
+
+                <strong>
+                    {{ request.vehicle_type }}
+                </strong>
+
+            </div>
+
+
+            <div class="detail">
+
+                <span>
+                    Service
+                </span>
+
+                <strong>
+                    {{ request.service }}
+                </strong>
+
+            </div>
+
+
+            <div class="detail">
+
+                <span>
+                    Location
+                </span>
+
+                <strong>
+                    {{ request.location }}
+                </strong>
+
+            </div>
+
+
+            <div class="detail">
+
+                <span>
+                    Amount
+                </span>
+
+                <strong>
+                    ₹{{ request.amount }}
+                </strong>
+
+            </div>
+
+
+            <div class="detail">
+
+                <span>
+                    Request Status
+                </span>
+
+                <strong>
+                    {{ request.status }}
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- TRACKING -->
+
+    <div class="tracking">
+
+        <h2>
+            Request Tracking
+        </h2>
+
+
+        {% if request.status == "Cancelled" %}
+
+            <div class="cancelled">
+
+                ❌
+
+                <strong>
+                    Request Cancelled
+                </strong>
+
+            </div>
+
+        {% else %}
+
+
+            <div class="timeline">
+
+
+                {% for step in timeline %}
+
+                    <div
+                        class="step {{ step.state }}"
+                    >
+
+                        <div class="circle">
+                        </div>
+
+
+                        <h3>
+
+                            {% if step.name == "Pending" %}
+
+                                🟡 Request Submitted
+
+                            {% elif step.name == "Accepted" %}
+
+                                🔵 Accepted
+
+                            {% elif step.name == "On The Way" %}
+
+                                🟣 Mechanic On The Way
+
+                            {% elif step.name == "Service Started" %}
+
+                                🟠 Service Started
+
+                            {% elif step.name == "Completed" %}
+
+                                🟢 Completed
+
+                            {% endif %}
+
+                        </h3>
+
+
+                        <p>
+
+                            {% if step.state == "completed" %}
+
+                                Completed
+
+                            {% elif step.state == "current" %}
+
+                                Current Status
+
+                            {% else %}
+
+                                Waiting
+
+                            {% endif %}
+
+                        </p>
+
+                    </div>
+
+                {% endfor %}
+
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+    <!-- PAYMENT -->
+
+    <div class="payment-box">
+
+        <h2>
+            Payment
+        </h2>
+
+
+        {% if request.payment_status == "Paid" %}
+
+
+            <div class="paid">
+
+                ✅
+
+                <strong>
+                    Payment Completed
+                </strong>
+
+                <br><br>
+
+                Payment Status:
+                <strong>
+                    Paid
+                </strong>
+
+                <br>
+
+                Payment Method:
+                <strong>
+                    {{ request.payment_method }}
+                </strong>
+
+                <br>
+
+                Amount Paid:
+                <strong>
+                    ₹{{ request.amount }}
+                </strong>
+
+            </div>
+
+
+            <div class="buttons">
+
+
+                <a
+                    href="{% url 'payment_receipt_pdf' request.id %}"
+                    class="btn receipt-btn"
+                    target="_blank"
+                >
+                    📄 Download Payment Receipt
+                </a>
+
+
+                <a
+                    href="{% url 'user_dashboard' %}"
+                    class="btn dashboard-btn"
+                >
+                    ← Customer Dashboard
+                </a>
+
+
+            </div>
+
+
+        {% else %}
+
+
+            <div class="pending">
+
+                ⏳
+
+                <strong>
+                    Payment Pending
+                </strong>
+
+                <br><br>
+
+                Amount to Pay:
+                <strong>
+                    ₹{{ request.amount }}
+                </strong>
+
+            </div>
+
+
+            <div class="buttons">
+
+
+                <a
+                    href="{% url 'payment' request.id %}"
+                    class="btn pay-btn"
+                >
+                    💳 Make Payment ₹{{ request.amount }}
+                </a>
+
+
+                <a
+                    href="{% url 'user_dashboard' %}"
+                    class="btn dashboard-btn"
+                >
+                    ← Customer Dashboard
+                </a>
+
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

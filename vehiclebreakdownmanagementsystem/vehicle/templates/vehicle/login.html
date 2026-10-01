@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Vehicle Breakdown Assistant</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+
+            background: #f5f8fc;
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            width: 390px;
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            width: 55px;
+            height: 55px;
+
+            background: #1760db;
+
+            border-radius: 12px;
+
+            margin: 0 auto 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+
+            font-weight: bold;
+
+            font-size: 20px;
+        }
+
+        h1 {
+            text-align: center;
+
+            color: #10203c;
+
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+
+            color: #71819d;
+
+            font-size: 14px;
+
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+
+            color: #243b5a;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            margin-bottom: 6px;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #dce3ed;
+
+            border-radius: 8px;
+
+            margin-bottom: 17px;
+
+            font-size: 14px;
+
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #1760db;
+        }
+
+        .login-btn {
+            width: 100%;
+
+            border: none;
+
+            background: #1760db;
+
+            color: white;
+
+            padding: 13px;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            background: #0e4fbf;
+        }
+
+        /* =========================
+           DJANGO MESSAGES
+        ========================= */
+
+        .messages {
+            margin-bottom: 18px;
+        }
+
+        .message {
+            padding: 11px 12px;
+
+            border-radius: 7px;
+
+            margin-bottom: 8px;
+
+            font-size: 13px;
+
+            text-align: center;
+
+            font-weight: 600;
+        }
+
+        /* Error message */
+
+        .message.error {
+            background: #ffe8e8;
+
+            color: #c62828;
+
+            border: 1px solid #ffcaca;
+        }
+
+        /* Success message */
+
+        .message.success {
+            background: #e8f8ee;
+
+            color: #18733c;
+
+            border: 1px solid #bce8ca;
+        }
+
+        /* Warning message */
+
+        .message.warning {
+            background: #fff7df;
+
+            color: #8a6500;
+
+            border: 1px solid #f1df9b;
+        }
+
+        /* Info message */
+
+        .message.info {
+            background: #e8f1ff;
+
+            color: #1855a0;
+
+            border: 1px solid #c5d9ff;
+        }
+
+        .register-text {
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #71819d;
+
+            font-size: 14px;
+        }
+
+        .register-text a {
+            color: #1760db;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .register-text a:hover {
+            text-decoration: underline;
+        }
+
+        .home-link {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 15px;
+
+            color: #71819d;
+
+            text-decoration: none;
+
+            font-size: 13px;
+        }
+
+        .home-link:hover {
+            color: #1760db;
+        }
+
+        @media (max-width: 450px) {
+
+            .login-container {
+                width: 92%;
+
+                padding: 28px 22px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<div class="login-container">
+
+
+    <!-- =========================
+         LOGO
+    ========================= -->
+
+    <div class="logo">
+        VBA
+    </div>
+
+
+    <!-- =========================
+         TITLE
+    ========================= -->
+
+    <h1>
+        Vehicle Breakdown Management
+    </h1>
+
+    <p class="subtitle">
+        Login to request vehicle assistance
+    </p>
+
+
+    <!-- =========================
+         DJANGO MESSAGES
+    ========================= -->
+
+    {% if messages %}
+
+        <div class="messages">
+
+            {% for message in messages %}
+
+                <div class="message {{ message.tags }}">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+
+    <!-- =========================
+         LOGIN FORM
+    ========================= -->
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+
+        <!-- USERNAME -->
+
+        <label>
+            Username
+        </label>
+
+        <input
+            type="text"
+            name="username"
+            placeholder="Enter username"
+            autocomplete="username"
+            required
+        >
+
+
+        <!-- PASSWORD -->
+
+        <label>
+            Password
+        </label>
+
+        <input
+            type="password"
+            name="password"
+            placeholder="Enter password"
+            autocomplete="current-password"
+            required
+        >
+
+
+        <!-- LOGIN BUTTON -->
+
+        <button
+            type="submit"
+            class="login-btn"
+        >
+            Login
+        </button>
+
+    </form>
+
+
+    <!-- =========================
+         REGISTER
+    ========================= -->
+
+    <p class="register-text">
+
+        Don't have an account?
+
+        <a href="{% url 'register' %}">
+            Register
+        </a>
+
+    </p>
+
+
+</div>
+
+
+</body>
+
+</html>

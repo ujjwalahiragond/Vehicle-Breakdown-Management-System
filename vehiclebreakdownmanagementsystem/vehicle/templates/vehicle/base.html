@@ -1,0 +1,281 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+        Vehicle Breakdown Assistant
+        {% endblock %}
+    </title>
+
+    
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+
+</head>
+
+
+<body>
+
+
+    
+
+<header class="navbar">
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+        <div class="logo-icon">
+        </div>
+
+        <div class="logo-text">
+
+            <span>
+                Vehicle Breakdown Assistant
+            </span>
+
+        </div>
+
+    </div>
+
+
+    
+
+    <nav class="navigation">
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+        <a href="{% url 'home' %}#services">
+            Services
+        </a>
+
+        <a href="{% url 'home' %}#how">
+            How It Works
+        </a>
+
+        <a href="{% url 'home' %}#about">
+            About
+        </a>
+
+        <a href="{% url 'home' %}#contact">
+            Contact
+        </a>
+
+        <a href="{% url 'track_request' %}">
+            Track Request
+        </a>
+
+    </nav>
+
+
+
+
+    <div class="nav-buttons">
+
+        {% if user.is_authenticated %}
+
+            <a href="{% url 'user_dashboard' %}"
+               class="login-btn">
+
+                Dashboard
+
+            </a>
+
+
+            <a href="{% url 'logout' %}"
+               class="register-btn">
+
+                Logout
+
+            </a>
+
+        {% else %}
+
+
+            <a href="{% url 'login' %}"
+               class="login-btn">
+
+                Login
+
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</header>
+
+
+<main>
+
+    {% block content %}
+
+    {% endblock %}
+
+</main>
+
+
+
+
+<footer class="footer">
+
+    <div class="footer-content">
+
+
+        <!-- BRAND -->
+
+        
+
+            <h3>
+                Vehicle Breakdown Assistant
+            </h3>
+
+            <p>
+                Vehicle Breakdown Assistant
+                Management System
+            </p>
+
+            <p>
+                Fast, reliable and professional
+                roadside assistance.
+            </p>
+
+        </div>
+
+
+
+    
+
+        <div class="footer-links">
+
+            <h3>
+                Quick Links
+            </h3>
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'home' %}#services">
+                Services
+            </a>
+
+            <a href="{% url 'home' %}#how">
+                How It Works
+            </a>
+
+            <a href="{% url 'home' %}#about">
+                About
+            </a>
+
+            <a href="{% url 'home' %}#contact">
+                Contact
+            </a>
+
+        </div>
+
+
+
+        <!-- SERVICES -->
+
+        <div class="footer-services">
+
+            <h3>
+                Our Services
+            </h3>
+
+            <p>
+                Mechanical Assistance
+            </p>
+
+            <p>
+                Battery Assistance
+            </p>
+
+            <p>
+                Tyre Assistance
+            </p>
+
+            <p>
+                Fuel Assistance
+            </p>
+
+            <p>
+                Towing Service
+            </p>
+
+        </div>
+
+
+
+        <div class="footer-contact">
+
+            <h3>
+                Emergency Assistance
+            </h3>
+
+            <p>
+                Available 24/7
+            </p>
+
+            <p>
+                Location Based Assistance
+            </p>
+
+            <p>
+                Verified Mechanics
+            </p>
+
+            <p>
+                Quick Response
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+
+
+    <div class="footer-bottom">
+
+        <p>
+            Built for safer and smarter journeys.
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<script src="{% static 'js/script.js' %}">
+</script>
+
+
+</body>
+
+</html>

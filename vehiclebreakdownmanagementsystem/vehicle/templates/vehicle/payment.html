@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Make Payment</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .payment-container {
+            width: 700px;
+            max-width: 92%;
+            background: white;
+            padding: 48px;
+            border-radius: 20px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 35px;
+            color: #111827;
+        }
+
+        .details-box {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 32px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid #d1d5db;
+            font-size: 21px;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: bold;
+            color: #111827;
+        }
+
+        .detail-value {
+            color: #111827;
+            text-align: right;
+        }
+
+        .amount {
+            font-size: 25px;
+            font-weight: bold;
+            color: #111827;
+        }
+
+        .payment-label {
+            display: block;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        select {
+            width: 100%;
+            padding: 17px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 18px;
+            background: white;
+            margin-bottom: 28px;
+        }
+
+        .pay-btn {
+            width: 100%;
+            border: none;
+            background: #198754;
+            color: white;
+            padding: 17px;
+            border-radius: 10px;
+            font-size: 23px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .pay-btn:hover {
+            background: #157347;
+        }
+
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 20px;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="payment-container">
+
+
+    <h1>
+        💳 Make Payment
+    </h1>
+
+
+    <!-- REQUEST DETAILS -->
+
+    <div class="details-box">
+
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Request ID
+            </span>
+
+            <span class="detail-value">
+                VBA-{{ request_data.id }}
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Customer
+            </span>
+
+            <span class="detail-value">
+                {{ request_data.customer_name }}
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Vehicle Number
+            </span>
+
+            <span class="detail-value">
+                {{ request_data.vehicle_number }}
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Service
+            </span>
+
+            <span class="detail-value">
+                {{ request_data.service }}
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Amount
+            </span>
+
+            <span class="detail-value amount">
+                ₹{{ request_data.amount }}
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- PAYMENT FORM -->
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+
+        <label class="payment-label">
+            Payment Method
+        </label>
+
+
+        <select
+            name="payment_method"
+            required
+        >
+
+            <option value="">
+                Select Payment Method
+            </option>
+
+            <option value="UPI">
+                UPI
+            </option>
+
+            <option value="Card">
+                Debit / Credit Card
+            </option>
+
+            <option value="Cash">
+                Cash
+            </option>
+
+        </select>
+
+
+        <button
+            type="submit"
+            class="pay-btn"
+        >
+
+            Pay ₹{{ request_data.amount }}
+
+        </button>
+
+
+    </form>
+
+
+    <a
+        href="{% url 'user_dashboard' %}"
+        class="back-btn"
+    >
+
+        ← Back to Dashboard
+
+    </a>
+
+
+</div>
+
+
+</body>
+
+</html>
