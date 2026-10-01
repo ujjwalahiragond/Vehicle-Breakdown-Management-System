@@ -146,9 +146,6 @@ The main goal of this project is to provide a **simple, organized, and efficient
                        │
                        ▼
                 Payment & Receipt
-                       │
-                       ▼
-               Rating & Feedback
 🛠️ Technology Stack
 Frontend
 HTML5
@@ -273,3 +270,6 @@ https://github.com/ujjwalahiragond
 📄 License
 
 This project is developed for academic and educational purposes.
+                       │
+                       ▼
+               Rating & Feedback
